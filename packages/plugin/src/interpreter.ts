@@ -437,12 +437,13 @@ export class Interpreter {
 
 
         // opt: Is the field optional?
-        if (this.registry.isScalarField(fieldDescriptor) || this.registry.isEnumField(fieldDescriptor)) {
-            if (this.registry.isUserDeclaredOptional(fieldDescriptor)) {
-                info.opt = true;
-            }
-        }
-
+        // if (this.registry.isScalarField(fieldDescriptor) || this.registry.isEnumField(fieldDescriptor)) {
+        //     if (this.registry.isUserDeclaredOptional(fieldDescriptor)) {
+        //         info.opt = true;
+        //     }
+        // }
+        //HACK: always respect what the file says
+        info.opt = this.registry.isUserDeclaredOptional(fieldDescriptor);
 
         // jsonName: The name for JSON serialization / deserialization.
         if (fieldDescriptor.jsonName) {
